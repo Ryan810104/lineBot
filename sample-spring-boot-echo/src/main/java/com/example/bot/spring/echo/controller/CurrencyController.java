@@ -1,31 +1,33 @@
-package Controller;
+package com.example.bot.spring.echo.controller;
 
-import Dao.CurrencyRepository;
+
+
+import com.example.bot.spring.echo.dao.CurrencyDAO;
+import com.example.bot.spring.echo.entity.Page1;
+import com.example.bot.spring.echo.service.Service;
 import entity.Page;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import service.Impl.CurrencyService;
 
+import java.util.List;
 
 @RestController
 @Transactional
 public class CurrencyController {
 
     @Autowired
-    CurrencyService currencyService;
+    Service currencyService;
 
     @Autowired
-    CurrencyRepository dao;
+    CurrencyDAO dao;
 
 
     @RequestMapping(value = "/find")
-    public Page findById(String Time){
-        Page page=currencyService.queryByTime("2020/3/4");
+    public List<Page1> findById(String Time){
+        List<Page1> page=currencyService.queryByTime("2020/3/4");
         System.out.println(page);
         return page;
     }
@@ -35,4 +37,5 @@ public class CurrencyController {
     public String sayHello(){
         return "hello";
     }
+
 }
