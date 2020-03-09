@@ -17,6 +17,7 @@
 package com.example.bot.spring.echo;
 
 
+
 import entity.Page;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +31,7 @@ import com.linecorp.bot.model.message.Message;
 import com.linecorp.bot.model.message.TextMessage;
 import com.linecorp.bot.spring.boot.annotation.EventMapping;
 import com.linecorp.bot.spring.boot.annotation.LineMessageHandler;
+import org.springframework.context.annotation.Bean;
 import service.IDownLoadService;
 import service.IProcessService;
 import service.Impl.HttpClientDownLoadService;
@@ -47,6 +49,7 @@ public class EchoApplication {
         SpringApplication.run(EchoApplication.class, args);
     }
 
+
     @EventMapping
     public Message handleTextMessageEvent(MessageEvent<TextMessageContent> event) {
         log.info("event: " + event);
@@ -61,6 +64,7 @@ public class EchoApplication {
         Page page=usd.downLoadPage(url);
         usd.processPage(page);
         if(receive!= null && receive.trim().length() > 0){
+
             String str1 = "美金";
             String strsign = "$";
             String str2 = "英鎊";
@@ -83,17 +87,6 @@ public class EchoApplication {
             return new TextMessage(replyMessage);
         }
         return null;
-
-
-
-//    System.out.println(page.getUSD()+"");
-//        if (event.getMessage().getText().toString() == "USD") {
-  //        originalMessageText=page.getUSD().toString();
-//        }else {
-//            originalMessageText = event.getMessage().getText() + "哈哈哈";
-//        }
-//        System.out.print(originalMessageText);
-//        return new TextMessage(originalMessageText);
     }
 
     @EventMapping
