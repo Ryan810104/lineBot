@@ -1,6 +1,6 @@
 package service.Impl;
 
-import entity.Page;
+import com.example.bot.spring.echo.entity.Page;
 import org.htmlcleaner.HtmlCleaner;
 import org.htmlcleaner.TagNode;
 import org.htmlcleaner.XPatherException;
@@ -31,7 +31,7 @@ public class TWBank implements IProcessService {
            if(evaluateXPath.length>0){
                TagNode node = (TagNode) evaluateXPath[0];
                System.out.println("USD"+node.getText().toString());
-            page.setUSD(node.getText().toString());
+            page.setUsd(node.getText().toString());
            }
         } catch (XPatherException e) {
             e.printStackTrace();
@@ -43,7 +43,7 @@ public class TWBank implements IProcessService {
             if(evaluateXPath.length>0){
                 TagNode node = (TagNode) evaluateXPath[0];
                 System.out.println("JPY"+node.getText().toString());
-                page.setJPY(node.getText().toString());
+                page.setJpy(node.getText().toString());
                 //System.out.println(node.getText().toString());
             }
         } catch (XPatherException e) {
@@ -56,7 +56,7 @@ public class TWBank implements IProcessService {
             if(evaluateXPath.length>0){
                 TagNode node = (TagNode) evaluateXPath[0];
                 System.out.println("HKD"+node.getText().toString());
-                page.setHKD(node.getText().toString());
+                page.setHkd(node.getText().toString());
                 //System.out.println(node.getText().toString());
             }
         } catch (XPatherException e) {
@@ -70,7 +70,7 @@ public class TWBank implements IProcessService {
             if(evaluateXPath.length>0){
                 TagNode node = (TagNode) evaluateXPath[0];
                 System.out.println("EUR"+node.getText().toString());
-                page.setEUR(node.getText().toString());
+                page.setEur(node.getText().toString());
                 //System.out.println(node.getText().toString());
             }
         } catch (XPatherException e) {
@@ -83,7 +83,7 @@ public class TWBank implements IProcessService {
             if(evaluateXPath.length>0){
                 TagNode node = (TagNode) evaluateXPath[0];
                 System.out.println("VND"+node.getText().toString());
-                page.setVND(node.getText().toString());
+                page.setVnd(node.getText().toString());
                 //System.out.println(node.getText().toString());
             }
         } catch (XPatherException e) {
@@ -96,7 +96,7 @@ public class TWBank implements IProcessService {
             if(evaluateXPath.length>0){
                 TagNode node = (TagNode) evaluateXPath[0];
                 System.out.println("RMB"+node.getText().toString());
-                page.setCNY(node.getText().toString());
+                page.setCny(node.getText().toString());
                 //System.out.println(node.getText().toString());
             }
         } catch (XPatherException e) {
@@ -109,7 +109,7 @@ public class TWBank implements IProcessService {
             if(evaluateXPath.length>0){
                 TagNode node = (TagNode) evaluateXPath[0];
                 System.out.println("SGD"+node.getText().toString());
-                page.setSGD(node.getText().toString());
+                page.setSgd(node.getText().toString());
                 //System.out.println(node.getText().toString());
             }
         } catch (XPatherException e) {
@@ -122,7 +122,7 @@ public class TWBank implements IProcessService {
             if(evaluateXPath.length>0){
                 TagNode node = (TagNode) evaluateXPath[0];
                 System.out.println("GBP"+node.getText().toString());
-                page.setGBP(node.getText().toString());
+                page.setGbp(node.getText().toString());
                 //System.out.println(node.getText().toString());
             }
         } catch (XPatherException e) {
@@ -135,7 +135,7 @@ public class TWBank implements IProcessService {
             if(evaluateXPath.length>0){
                 TagNode node = (TagNode) evaluateXPath[0];
                 System.out.println("THB "+node.getText().toString());
-                page.setTHB(node.getText().toString());
+                page.setThb(node.getText().toString());
                 //System.out.println(node.getText().toString());
             }
         } catch (XPatherException e) {

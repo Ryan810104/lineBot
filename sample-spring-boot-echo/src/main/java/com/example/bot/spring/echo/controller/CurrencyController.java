@@ -5,7 +5,6 @@ package com.example.bot.spring.echo.controller;
 import com.example.bot.spring.echo.dao.CurrencyDAO;
 import com.example.bot.spring.echo.entity.Page1;
 import com.example.bot.spring.echo.service.Service;
-import entity.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,10 +25,10 @@ public class CurrencyController {
 
 
     @RequestMapping(value = "/find")
-    public List<Page1> findById(String Time){
-        List<Page1> page=currencyService.queryByTime("2020/3/4");
-        System.out.println(page);
-        return page;
+    public Page1 findByTime(String Time){
+        Page1 page1=currencyService.queryByTime(Time);
+        System.out.println(page1.getCny());
+        return page1;
     }
 
 

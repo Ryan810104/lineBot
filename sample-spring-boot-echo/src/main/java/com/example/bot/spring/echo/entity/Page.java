@@ -1,18 +1,17 @@
 package com.example.bot.spring.echo.entity;
 
-
 import lombok.Data;
 
 import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name="CURRENCYRECORD")
-public class Page1 {
+@Table(name="CURRENCY")
+public class Page {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer number;
-    //private String content;
+    private String content;
     private String time;
     private String jpy;
     private String usd;
@@ -23,6 +22,7 @@ public class Page1 {
     private String sgd;
     private String gbp;
     private String thb;
-    //private String url;
+    private String url;
+
 
 }

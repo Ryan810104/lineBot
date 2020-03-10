@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS currency;
 
-CREATE TABLE currency (
+
+CREATE TABLE user (
                           number INT AUTO_INCREMENT  PRIMARY KEY,
                           time VARCHAR(250) NOT NULL,
                           jpy VARCHAR(250) NOT NULL,

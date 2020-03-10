@@ -1,6 +1,6 @@
 package service;
 
-import entity.Page;
+import com.example.bot.spring.echo.entity.Page;
 
 //下載頁面
 public interface IDownLoadService {

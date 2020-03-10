@@ -1,6 +1,6 @@
 package start;
 
-import entity.Page;
+import com.example.bot.spring.echo.entity.Page;
 import lombok.Data;
 import service.IDownLoadService;
 import service.IProcessService;

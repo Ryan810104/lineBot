@@ -18,9 +18,12 @@ package com.example.bot.spring.echo;
 
 
 
-import entity.Page;
+import com.example.bot.spring.echo.controller.CurrencyController;
+import com.example.bot.spring.echo.entity.Page;
+import com.example.bot.spring.echo.entity.Page1;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -31,9 +34,6 @@ import com.linecorp.bot.model.message.Message;
 import com.linecorp.bot.model.message.TextMessage;
 import com.linecorp.bot.spring.boot.annotation.EventMapping;
 import com.linecorp.bot.spring.boot.annotation.LineMessageHandler;
-import org.springframework.context.annotation.Bean;
-import service.IDownLoadService;
-import service.IProcessService;
 import service.Impl.HttpClientDownLoadService;
 import service.Impl.TWBank;
 import start.StartUSD;
@@ -48,7 +48,8 @@ public class EchoApplication {
     public static void main(String[] args) {
         SpringApplication.run(EchoApplication.class, args);
     }
-
+@Autowired
+CurrencyController controller;
 
     @EventMapping
     public Message handleTextMessageEvent(MessageEvent<TextMessageContent> event) {
@@ -75,14 +76,15 @@ public class EchoApplication {
             String command = receive.toLowerCase().trim();
             //if ("USD".equalsIgnoreCase(command)) {
             if (command.contains(str1)||command.contains(strsign)) {
-                replyMessage = page.getTime().toString()+"報價為"+page.getUSD().toString();
+                    Page1 page1=controller.findByTime("2020/3/4");
+                replyMessage = page.getTime().toString()+"報價為"+page1.getUsd().toString();
             }else if(command.contains(str2)){
-                replyMessage = page.getTime().toString()+"報價為"+page.getGBP().toString();
+                replyMessage = page.getTime().toString()+"報價為"+page.getGbp().toString();
             }else if(command.contains(str3)||command.contains(stre)){
-                replyMessage = page.getTime().toString()+"報價為"+page.getEUR().toString();
+                replyMessage = page.getTime().toString()+"報價為"+page.getEur().toString();
             }
             else{
-                replyMessage = "is this good to drink ?";
+                replyMessage = "Is this good to drink ?";
             }
             return new TextMessage(replyMessage);
         }

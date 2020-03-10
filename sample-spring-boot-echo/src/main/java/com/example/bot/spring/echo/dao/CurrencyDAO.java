@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface CurrencyDAO extends JpaRepository <Page1,Integer>{
-    public List<Page1> findByTime(String time);
+    public Page1 findByTime(String time);
 }
