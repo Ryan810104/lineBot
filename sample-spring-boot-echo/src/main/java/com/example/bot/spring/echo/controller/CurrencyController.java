@@ -27,8 +27,7 @@ public class CurrencyController {
     @RequestMapping(value = "/find")
     public Page1 findByTime(String Time){
         Page1 page1=currencyService.queryByTime(Time);
-        System.out.println(page1.getCny());
-        return page1;
+      return page1;
     }
 
 
@@ -36,5 +35,4 @@ public class CurrencyController {
     public String sayHello(){
         return "hello";
     }
-
 }

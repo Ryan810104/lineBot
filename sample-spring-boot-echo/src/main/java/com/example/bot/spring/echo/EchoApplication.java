@@ -58,12 +58,19 @@ CurrencyController controller;
 //        Page page=down.download("https://rate.bot.com.tw/xrt?Lang=zh-TW");
         String receive = event.getMessage().getText();
         String originalMessageText="";
+        //啟動爬蟲
         StartUSD usd = new StartUSD();
         usd.setDownLoadService(new HttpClientDownLoadService());
         usd.setProcessService(new TWBank());
+
+        //爬蟲網址
         String url = "https://rate.bot.com.tw/xrt?Lang=zh-TW";
+
+        //儲存頁面資料
         Page page=usd.downLoadPage(url);
         usd.processPage(page);
+
+        //檢查是否有接收的傳進來的訊息
         if(receive!= null && receive.trim().length() > 0){
 
             String str1 = "美金";
@@ -72,19 +79,93 @@ CurrencyController controller;
 
             String str3 = "歐元";
             String stre = "eu";
+            String time = "2020";
             String replyMessage = "";
+            //收到對方的訊息改成小寫以及除掉空格
             String command = receive.toLowerCase().trim();
-            //if ("USD".equalsIgnoreCase(command)) {
-            if (command.contains(str1)||command.contains(strsign)) {
-                    Page1 page1=controller.findByTime("2020/3/4");
-                replyMessage = page.getTime().toString()+"報價為"+page1.getUsd().toString();
-            }else if(command.contains(str2)){
-                replyMessage = page.getTime().toString()+"報價為"+page.getGbp().toString();
-            }else if(command.contains(str3)||command.contains(stre)){
-                replyMessage = page.getTime().toString()+"報價為"+page.getEur().toString();
-            }
-            else{
-                replyMessage = "Is this good to drink ?";
+
+
+
+
+            //先檢查是否有包含時間
+            if(command.contains(time)){
+                //檢查是否包含"美金"
+                if (command.contains(str1)) {
+
+                    //擷取收到資料前面10個數字預設為日期
+                    String ReciveTime=command.substring(0, 10);
+                    String pattern = "^[0-9]{4}/[0-1]{1}[0-9]{1}/[0-1]{1}[0-9]{1}$";
+                    //檢查是否符合日期格式，若不符合則回覆要求照格式
+                    if(!ReciveTime.matches(pattern)){
+                        replyMessage="請依照2020/03/04美金 格式詢問";
+                    }else{
+                        //若有符合格式則就去資料庫撈取歷史報價
+                        Page1 page1 = controller.findByTime(ReciveTime);
+                        if(page1==null){
+                            replyMessage="請輸入正確日期";
+                        }else {
+                            replyMessage = command.substring(0, 10) + "報價為" + page1.getUsd().toString();
+                        }
+                    }
+                }else if(command.contains(str2)){
+                    //擷取收到資料前面10個數字預設為日期
+                    String ReciveTime=command.substring(0, 10);
+                    String pattern = "^[0-9]{4}/[0-1]{1}[0-9]{1}/[0-1]{1}[0-9]{1}$";
+                    //檢查是否符合日期格式，若不符合則回覆要求照格式
+                    if(!ReciveTime.matches(pattern)){
+                        replyMessage="請依照2020/03/04美金 格式詢問";
+                    }else{
+                        //若有符合格式則就去資料庫撈取歷史報價
+                        Page1 page1 = controller.findByTime(ReciveTime);
+                        if(page1==null){
+                            replyMessage="請輸入正確日期";
+                        }else {
+                            replyMessage = command.substring(0, 10) + "報價為" + page1.getGbp().toString();
+                        }
+                    }
+
+                } else if(command.contains(str3)){
+                    //擷取收到資料前面10個數字預設為日期
+                    String ReciveTime=command.substring(0, 10);
+                    String pattern = "^[0-9]{4}/[0-1]{1}[0-9]{1}/[0-1]{1}[0-9]{1}$";
+                    //檢查是否符合日期格式，若不符合則回覆要求照格式
+                    if(!ReciveTime.matches(pattern)){
+                        replyMessage="請依照2020/03/04美金 格式詢問";
+                    }else{
+                        //若有符合格式則就去資料庫撈取歷史報價
+                        Page1 page1 = controller.findByTime(ReciveTime);
+                        if(page1==null){
+                            replyMessage="請輸入正確日期";
+                        }else {
+                            replyMessage = command.substring(0, 10) + "報價為" + page1.getEur().toString();
+                        }
+                    }
+                }
+
+                else {
+                    replyMessage = "請檢察輸入幣別";
+                }
+            }else {
+                //沒包含時間則為去爬蟲撈及時報價
+                //美金
+                if (command.contains(str1) || command.contains(strsign)) {
+
+                    replyMessage = page.getTime().toString() + "報價為" + page.getUsd().toString();
+
+                    //英鎊
+                } else if (command.contains(str2)) {
+                    replyMessage = page.getTime().toString() + "報價為" + page.getGbp().toString();
+
+                    //歐元
+                } else if (command.contains(str3) || command.contains(stre)) {
+                    replyMessage = page.getTime().toString() + "報價為" + page.getEur().toString();
+
+
+                } else {
+                    replyMessage = "Is this good to drink ?";
+                }
+
+
             }
             return new TextMessage(replyMessage);
         }
